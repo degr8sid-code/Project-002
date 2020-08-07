@@ -43,4 +43,4 @@ jobs:
     
     # Deploy Surge
     - name: Deploy React App to Surge
-      run: surge ./build project002-adil.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+      run: surge ./build bootcamp_project002_degr8sidcode.surge.sh/ --token ${{ secrets.SURGE_TOKEN }}
