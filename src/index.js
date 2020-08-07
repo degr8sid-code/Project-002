@@ -1,17 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import axios from 'axios';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+/*function Hi() {
+  //return <div>Hello World</div>;
+return <div>Hello <strong>Sidrah</strong></div>
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+}*/
+
+/*function greet (props) {
+  return <div>Hi {props.firstname} {props.lastname}</div>;
+}*/
+
+/*function Room() {
+  
+  const [isLit, setLit] = React.useState(true);
+  const brightness = isLit ? "lit" : "dark";
+
+  return (
+    <div className={`room${brightness}`}>This room is {brightness}
+    <br/>
+    <button onClick={() => setLit(!isLit)}> flip </button>
+    </div>
+  );
+}
+
+
+ReactDOM.render(<Room />, document.getElementById('root'));*/
+
+function Reddit() {
+  const [posts, setPosts] = React.useState([]);
+  React.useEffect(() => {
+    axios.get(`https://www.reddit.com/r/reactjs.json`)
+      .then(res => {
+        const newPosts = res.data.data.children
+          .map(obj => obj.data);
+  
+        setPosts(newPosts);
+      });
+  }, []);
+  return (
+    <div>
+      <h1>/r/reactjs</h1>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+ReactDOM.render(<Reddit />, document.getElementById("root"));
